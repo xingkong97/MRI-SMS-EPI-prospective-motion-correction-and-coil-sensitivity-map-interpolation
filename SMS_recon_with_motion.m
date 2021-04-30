@@ -126,6 +126,7 @@ for iSMS=1:prot.Nslice
 end
 
 KSpaceDATA=out.kdata;
+kdata_sliceimg=out.kdata_sliceimg;
 %SENSE recon
 %recon by original coilSen maps
 coilSen=permute(coilSen_1,[1,2,4,3]);
@@ -142,19 +143,27 @@ recon_slice_U=permute(recon_slice_U,[1,2,4,3]);
 img_U_1=flip(abs(recon_slice_U(:,:,1,4))');
 img_U_2=flip(abs(recon_slice_U(:,:,1,6))');
 img_U_3=flip(abs(recon_slice_U(:,:,1,7))');
+
+%single-slice reference images
+img_R_1=flip(sqrtSum(kdata_sliceimg(:,:,:,4),1,1)');
+img_R_2=flip(sqrtSum(kdata_sliceimg(:,:,:,6),1,1)');
+img_R_3=flip(sqrtSum(kdata_sliceimg(:,:,:,7),1,1)');
+
 %show all recon images
 %showimagefft(recon_slice_U,0);
 
 subplot(2,1,1);
 imagesc(cat(2,img_S_1,img_S_2,img_S_3));colormap jet;
-title('SENSE images recon with Original coilSen maps')
+title('SENSE images recon with Original coilSen maps');
 subplot(2,1,2);
 imagesc(cat(2,img_U_1,img_U_2,img_U_3));colormap jet;
-title('SENSE images recon with Updated coilSen maps')
+title('SENSE images recon with Updated coilSen maps');
+% subplot(3,1,3);
+% imagesc(cat(2,img_R_1,img_R_2,img_R_3));colormap jet;
+% title('Single-slice reference images');
 
 %Split slice-GRAPPA recon
 %recon by original coilSen maps
-kdata_sliceimg=out.kdata_sliceimg;
 recon_slice_L=DoSplitSliceGrappa(kdata_sliceimg, KSpaceDATA, out.sliceOrderSMS, prot);
 img_L_1=flip(sqrtSum(recon_slice_L(:,:,:,4),0,1)');
 img_L_2=flip(sqrtSum(recon_slice_L(:,:,:,6),0,1)');
@@ -185,10 +194,13 @@ img_T_3=flip(sqrtSum(recon_slice_T(:,:,:,7),0,1)');
 figure;
 subplot(2,1,1);
 imagesc(cat(2,img_L_1,img_L_2,img_L_3));colormap jet;
-title('Split slice-GRAPPA images recon with Original coilSen maps')
+title('Split slice-GRAPPA images recon with Original coilSen maps');
 subplot(2,1,2);
 imagesc(cat(2,img_T_1,img_T_2,img_T_3));colormap jet;
-title('Split slice-GRAPPA images recon with Updated coilSen maps')
+title('Split slice-GRAPPA images recon with Updated coilSen maps');
+% subplot(3,1,3);
+% imagesc(cat(2,img_R_1,img_R_2,img_R_3));colormap jet;
+% title('Single-slice reference images')
 
 %plot motion parameters. x axis means the abstract time
 %measMotionInfo is the motion parameters for all measurements
