@@ -1,6 +1,5 @@
 function res=SplitSliceGrappa(kspace, calib, kernel_size, lamda, IsSplit)
 %(Split-)slice grappa reconstruction for SMS scan. 
-%the MATLAB code was translated from python version split slice-GRAPPA (pygrappa)
 %author: Bo Li 4-28-2021
 
 %input
