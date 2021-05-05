@@ -1,6 +1,7 @@
 function res=SplitSliceGrappa(kspace, calib, kernel_size, lamda, IsSplit)
 %(Split-)slice grappa reconstruction for SMS scan. 
 %author: Bo Li 4-28-2021
+%reference: pygrappa-master
 
 %input
 %kspace: aliasing kspace data
