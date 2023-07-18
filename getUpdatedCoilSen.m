@@ -16,8 +16,9 @@ function coilSen_Update=getUpdatedCoilSen(tukey_window,MotionMatrix, coilSen_mat
 %OUTPUT: coilSen_Update, Updated CSM
 %
 %%%%%% Written by: Bo Li, University of Maryland, Baltimore
-%%%%%% for manuscript "SMS-EPI prospective motion correction 
-%%%%%% by real-time phase compensation and coil sensitivity map interpolation"
+%%%%%% for paper "Simultaneous multislice EPI prospective motion correction 
+%%%%%% by realtime receiver phase correction and coil sensitivity map interpolation. 
+%%%%%% Magn Reson Med. 2023;1-17. doi:10.1002/mrm.29789"
 %%%%%% Created on Sep. 22, 2022
 
     coilSen_Update=zeros(prot.Nread,prot.Nphase,prot.OriNslice,prot.chn);
